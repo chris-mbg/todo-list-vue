@@ -30,15 +30,22 @@ export default new Vuex.Store({
   },
 
   mutations: {
-    deleteTodoFromList: (state, payload) => {
+    addNewTodo: (state, payload) => {
+      state.todoList.unshift(payload)
+    },
+
+    deleteTodo: (state, payload) => {
       state.todoList =
         state.todoList.filter(item => item.content !== payload.content);
     }
   },
 
   actions: {
+    addNewTodoToList: (context, payload) => {
+      context.commit('addNewTodo', payload);
+    },
     removeTodoFromList: (context, payload) => {
-      context.commit('deleteTodoFromList', payload);
+      context.commit('deleteTodo', payload);
     }
   },
 

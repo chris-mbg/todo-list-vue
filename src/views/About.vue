@@ -32,11 +32,4 @@ export default {
     text-align: center;
   }
 
-  /*     Color scheme
-     #687864  dark green
-     #31708E  darker blue-ish
-     #5085A5  more grey blue-ish
-     #8FC1E3  lighter blue
-     #F7F9FB  soft light/white-ish
-     */
 </style>
