@@ -1,15 +1,14 @@
 <template>
-  <div class="home">
-    
+  <div class="todo-list">
+
 
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
+
 
 export default {
-  name: 'Home',
 
 }
 </script>
