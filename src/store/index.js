@@ -28,10 +28,20 @@ export default new Vuex.Store({
       }
     ]
   },
+
   mutations: {
+    deleteTodoFromList: (state, payload) => {
+      state.todoList =
+        state.todoList.filter(item => item.content !== payload.content);
+    }
   },
+
   actions: {
+    removeTodoFromList: (context, payload) => {
+      context.commit('deleteTodoFromList', payload);
+    }
   },
+
   modules: {
   }
 })

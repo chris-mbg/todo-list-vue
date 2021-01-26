@@ -3,15 +3,24 @@
     <div class="content">{{ todoItem.content}}</div>
     <div class="author">{{ todoItem.author}}</div>
     <div class="timestamp">{{ todoItem.timestamp}}</div>
-    <div class="delete">
-            <button>Delete</button>
+    <div class="buttons">
+      <button>Task done!</button>
+      <button>Move up</button>
+      <button>Move down</button>
+      <button @click="deleteTodo">Delete</button>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['todoItem']
+  props: ['todoItem'],
+
+  methods: {
+    deleteTodo() {
+      this.$store.dispatch('removeTodoFromList', this.todoItem);
+    }
+  }
 
 }
 </script>
@@ -21,16 +30,22 @@ export default {
     background-color: #687864dd;
     border-radius: 10px;
     border: 3px solid #f7f9fb;
-    padding: 2rem;
+    padding: 1rem;
+    margin: 1rem 0;
   }
 
   .todo-item > *{
-    margin: 1rem;
+    margin: 0.7rem;
   }
-
+  .content {
+    font-weight: 600;
+    padding-bottom: 1rem;
+    border-bottom: 1px dashed #f7f9fb;
+  }
   .author{
     font-style: italic;
   }
+
   button {
     font-family: 'Quicksand', sans-serif;
     padding: 0.2rem 0.6rem;
@@ -38,6 +53,7 @@ export default {
     color: #F7F9FB;
     border: 1px solid #F7F9FB;
     border-radius: 5px;
+    margin: 0 0.5rem;
   }
   button:hover{
     background-color: #f7f9fb;

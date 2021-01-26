@@ -25,11 +25,8 @@ export default {
 
 <style scoped>
   .todo-container {
-    display: grid;
-    max-width: 800px;
+    max-width: 500px;
     margin: 2rem auto;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 2rem;
   }
 
 </style>
