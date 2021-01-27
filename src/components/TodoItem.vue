@@ -1,7 +1,7 @@
 <template>
-  <div class="todo-item">
+  <div class="todo-item" v-bind:class="{done: todoItem.done}">
     <div class="content">
-      <p>{{ todoItem.content}}</p>
+      <p>{{ todoItem.content}}</p><span v-show="todoItem.done">Done!</span>
     </div>
     <div class="details">
       <p class="author">{{ todoItem.author}}</p>
@@ -9,9 +9,9 @@
     </div>
     <div class="buttons">
       <button @click="deleteTodo" class="delete">Delete</button>
-      <button @click="moveUp">Move up</button>
-      <button @click="moveDown">Move down</button>
-      <button @click="taskDone">Task done!</button>
+      <button @click="moveUp" v-show="!todoItem.done">Move up</button>
+      <button @click="moveDown" v-show="!todoItem.done">Move down</button>
+      <button @click="taskDone" v-show="!todoItem.done">Task done!</button>
     </div>
   </div>
 </template>
@@ -57,6 +57,29 @@ export default {
     text-align: center;
     font-size: 1.1rem;
   }
+  .done {
+    background-color: #6a6e6add;
+    border-radius: 10px;
+    border: 3px solid #f7f9fb;
+    font-size: 0.9rem;
+    padding: 0.5rem;
+  }
+  .done div.content {
+    padding: 0;
+    margin: 0;
+  }
+  .done div.content > p{
+    text-decoration: line-through;
+    display: inline-block;
+  }
+  .done span {
+    font-style: italic;
+    margin-left: 1rem;
+    color: #8FC1E3
+  }
+  .done .buttons {
+    justify-content: flex-start;
+  }
   .details {
     border-top: 0.5px dashed #f7f9fb;
     display: flex;
@@ -67,7 +90,7 @@ export default {
   }
   .buttons {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
   }
   button {
     padding: 0.2rem 0.6rem;

@@ -25,7 +25,7 @@ export default new Vuex.Store({
         done: false
       },
       {
-        content: 'Buy coffee filters!',
+        content: 'Buy coffee filters',
         author: 'Christina',
         timestamp: 'Thu, 21 Jan, 11:34',
         done: false
