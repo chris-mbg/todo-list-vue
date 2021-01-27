@@ -22,15 +22,22 @@ export default {
     background-color: #687864cc;
     border-radius: 5px;
     border: 3px solid  #F7F9FB;
-    margin: 2rem auto;
+    margin: 1rem;
     padding: 1rem 2rem;
-    max-width: 680px;
-    font-size: 1.2rem;
-    line-height: 1.7rem;
+    max-width: 670px;
+    line-height: 1.5rem;;
     text-align: justify;
   }
   .about h1 {
     text-align: center;
+  }
+
+   @media screen and (min-width: 680px){
+    .about {
+      margin: 2rem auto;
+      font-size: 1.2rem;
+      line-height: 1.7rem;
+    }
   }
 
 </style>

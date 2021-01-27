@@ -1,8 +1,6 @@
 <template>
   <div class="todo-list">
-    <div class="todo-container">
       <TodoItem v-for="(item, i) in todoList" :key="i" :todoItem="item"/>
-    </div>
   </div>
 </template>
 
@@ -24,9 +22,14 @@ export default {
 </script>
 
 <style scoped>
-  .todo-container {
+  .todo-list {
+    margin: 0.5rem;
     max-width: 500px;
-    margin: 2rem auto;
   }
 
+   @media screen and (min-width: 500px){
+    .todo-list {
+      margin: 2rem auto;
+    }
+  }
 </style>

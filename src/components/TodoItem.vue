@@ -49,7 +49,7 @@ export default {
   }
 
   .todo-item > *{
-    margin: 0.7rem;
+    margin: 0 0.5rem;
   }
   .content {
     font-weight: 600;
@@ -61,8 +61,7 @@ export default {
     background-color: #6a6e6add;
     border-radius: 10px;
     border: 3px solid #f7f9fb;
-    font-size: 0.9rem;
-    padding: 0.5rem;
+    font-size: 0.8rem;
   }
   .done div.content {
     padding: 0;
@@ -71,11 +70,12 @@ export default {
   .done div.content > p{
     text-decoration: line-through;
     display: inline-block;
+    font-size: 0.9rem;
   }
   .done span {
     font-style: italic;
     margin-left: 1rem;
-    color: #8FC1E3
+    color:#5a8f4d
   }
   .done .buttons {
     justify-content: flex-start;
