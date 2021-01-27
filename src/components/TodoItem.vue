@@ -11,7 +11,7 @@
       <button @click="deleteTodo" class="delete">Delete</button>
       <button @click="moveUp" v-show="!todoItem.done">Move up</button>
       <button @click="moveDown" v-show="!todoItem.done">Move down</button>
-      <button @click="taskDone" v-show="!todoItem.done">Task done!</button>
+      <button @click="taskDone" v-show="!todoItem.done" class="done-button">Task done!</button>
     </div>
   </div>
 </template>
@@ -44,12 +44,8 @@ export default {
     background-color: #687864dd;
     border-radius: 10px;
     border: 3px solid #f7f9fb;
-    padding: 1rem;
+    padding: 0.75rem;
     margin: 1rem 0;
-  }
-
-  .todo-item > *{
-    margin: 0 0.5rem;
   }
   .content {
     font-weight: 600;
@@ -91,14 +87,16 @@ export default {
   .buttons {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap-reverse;
   }
   button {
-    padding: 0.2rem 0.6rem;
+    padding: 0.3rem 0.6rem;
     background-color: #5085A5;
     color: #F7F9FB;
     border: 1px solid #F7F9FB;
     border-radius: 5px;
-    margin: 0 0.5rem;
+    margin: 0.3rem 0.5rem;
   }
   button:hover{
     background-color: #f7f9fb;
@@ -106,6 +104,29 @@ export default {
   }
   .delete {
      background-color: #8fc1e3;
+  }
+  .done-button {
+    margin: 0.3rem 0.5rem 0.3rem auto;
+    font-weight: 600;
+  }
+
+  @media screen and (min-width: 680px) {
+    .todo-item {
+      padding: 1rem;
+    }
+
+    .todo-item > *{
+      margin: 0 0.5rem;
+    }
+    button {
+      padding: 0.4rem 0.8rem;
+      font-size: 0.9rem;
+    }
+    .done .delete {
+      padding: 0.3rem 0.6rem;
+      font-size: 0.8rem;
+      margin: 0;
+    }
   }
 
   /*
