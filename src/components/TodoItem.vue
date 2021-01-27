@@ -1,13 +1,17 @@
 <template>
   <div class="todo-item">
-    <div class="content">{{ todoItem.content}}</div>
-    <div class="author">{{ todoItem.author}}</div>
-    <div class="timestamp">{{ todoItem.timestamp}}</div>
+    <div class="content">
+      <p>{{ todoItem.content}}</p>
+    </div>
+    <div class="details">
+      <p class="author">{{ todoItem.author}}</p>
+      <p class="timestamp">{{ todoItem.timestamp}}</p>
+    </div>
     <div class="buttons">
-      <button>Task done!</button>
-      <button>Move up</button>
-      <button>Move down</button>
-      <button @click="deleteTodo">Delete</button>
+      <button @click="deleteTodo" class="delete">Delete</button>
+      <button @click="moveUp">Move up</button>
+      <button @click="moveDown">Move down</button>
+      <button @click="taskDone">Task done!</button>
     </div>
   </div>
 </template>
@@ -19,6 +23,16 @@ export default {
   methods: {
     deleteTodo() {
       this.$store.dispatch('removeTodoFromList', this.todoItem);
+    },
+    taskDone() {
+      this.$store.dispatch('changeToDone', this.todoItem);
+    },
+    moveUp() {
+      this.$store.dispatch('moveItemUp', this.todoItem);
+      console.log('In todoItem:', this.todoItem);
+    },
+    moveDown() {
+      this.$store.dispatch('moveItemDown', this.todoItem);
     }
   }
 
@@ -39,15 +53,23 @@ export default {
   }
   .content {
     font-weight: 600;
-    padding-bottom: 1rem;
-    border-bottom: 1px dashed #f7f9fb;
+    padding-bottom: 0.5rem;
+    text-align: center;
+    font-size: 1.1rem;
+  }
+  .details {
+    border-top: 0.5px dashed #f7f9fb;
+    display: flex;
+    justify-content: space-between;
   }
   .author{
     font-style: italic;
   }
-
+  .buttons {
+    display: flex;
+    justify-content: space-evenly;
+  }
   button {
-    font-family: 'Quicksand', sans-serif;
     padding: 0.2rem 0.6rem;
     background-color: #5085A5;
     color: #F7F9FB;
@@ -58,6 +80,9 @@ export default {
   button:hover{
     background-color: #f7f9fb;
     color: #5085a5;
+  }
+  .delete {
+     background-color: #8fc1e3;
   }
 
   /*

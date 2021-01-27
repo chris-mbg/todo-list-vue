@@ -25,20 +25,11 @@ export default {
     background-size: cover;
     background-position: center;
     min-height: 100vh;
-
-    font-family: 'Quicksand', sans-serif;
     color: #F7F9FB;
-
-
-    /*
-     Color scheme
-     #687864  dark green
-     #31708E  darker blue-ish
-     #5085A5  more grey blue-ish
-     #8FC1E3  lighter blue
-     #F7F9FB  soft light/white-ish
-
-     */
+  }
+  * {
+    font-family: 'Quicksand', sans-serif;
+    box-sizing: border-box;
   }
 
 </style>

@@ -7,7 +7,7 @@
 
     <p>Celery quandong swiss chard chicory earthnut pea potato. Salsify taro catsear garlic gram celery bitterleaf wattle seed collard greens nori. Grape wattle seed kombu beetroot horseradish carrot squash brussels sprout chard.</p>
 
-    <p>Pea horseradish azuki bean lettuce avocado asparagus okra. Kohlrabi radish okra azuki bean corn fava bean mustard tigernut jï¿½cama green bean celtuce collard greens avocado quandong fennel gumbo black-eyed pea. Grape silver beet watercress potato tigernut corn groundnut.</p>
+    <p>Pea horseradish azuki bean lettuce avocado asparagus okra. Kohlrabi radish okra azuki bean corn fava bean mustard tigernut green bean celtuce collard greens avocado quandong fennel gumbo black-eyed pea. Grape silver beet watercress potato tigernut corn groundnut.</p>
   </div>
 </template>
 
@@ -23,10 +23,11 @@ export default {
     border-radius: 5px;
     border: 3px solid  #F7F9FB;
     margin: 2rem auto;
-    padding: 1rem;
-    max-width: 700px;
+    padding: 1rem 2rem;
+    max-width: 680px;
     font-size: 1.2rem;
     line-height: 1.7rem;
+    text-align: justify;
   }
   .about h1 {
     text-align: center;
