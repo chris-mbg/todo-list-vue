@@ -34,26 +34,34 @@ export default new Vuex.Store({
   },
 
   mutations: {
+    initialiseStore: (state) => {
+      if(localStorage.getItem('todos')){
+        state.todoList = JSON.parse(localStorage.getItem('todos'));
+        return state.todoList;
+      }
+    },
     addNewTodo: (state, payload) => {
-      state.todoList.unshift(payload)
+      state.todoList.unshift(payload);
+      localStorage.setItem('todos', JSON.stringify(state.todoList));
+      console.log(localStorage.getItem('todos'));
     },
 
     deleteTodo: (state, payload) => {
       state.todoList =
         state.todoList.filter(item => item.content !== payload.content);
+      localStorage.setItem('todos', JSON.stringify(state.todoList));
       console.log(state.todoList);
       return state.todoList;
     },
     taskDone: (state,payload) => {
-      console.log('In taskDone', state.todoList);
       payload.done = true;
-
       const indexOfItem = state.todoList.findIndex(item => item.content === payload.content);
       if(indexOfItem < 0 || indexOfItem >= state.todoList.length){
         return;
       }
       const doneItem = state.todoList.splice(indexOfItem, 1)[0];
       state.todoList.push(doneItem);
+      localStorage.setItem('todos', JSON.stringify(state.todoList));
     },
     moveUp: (state,payload) => {
       console.log('In mutations', payload);
@@ -65,6 +73,7 @@ export default new Vuex.Store({
       const temp = state.todoList[indexOfItem - 1];
       Vue.set(state.todoList, indexOfItem - 1, payload);
       Vue.set(state.todoList, indexOfItem, temp);
+      localStorage.setItem('todos', JSON.stringify(state.todoList));
     },
     moveDown: (state, payload) => {
       const indexOfItem = state.todoList.findIndex(item => item.content === payload.content);
@@ -74,7 +83,7 @@ export default new Vuex.Store({
       const temp = state.todoList[indexOfItem + 1];
       Vue.set(state.todoList, indexOfItem + 1, payload);
       Vue.set(state.todoList, indexOfItem, temp);
-      console.log('In moveDown mutation:', state.todoList)
+      localStorage.setItem('todos', JSON.stringify(state.todoList));
     }
   },
 
@@ -89,7 +98,6 @@ export default new Vuex.Store({
       context.commit('taskDone', payload);
     },
     moveItemUp: (context, payload) => {
-      console.log('In actions:', payload);
       context.commit('moveUp', payload);
     },
     moveItemDown: (context, payload) => {

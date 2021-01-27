@@ -39,7 +39,6 @@ export default {
                 timestamp: this.getTime(),
                 done: false
             };
-            console.log('In AddTodo.vue:', newTodo);
             this.$store.dispatch('addNewTodoToList', newTodo);
             this.$router.push('/');
         },
