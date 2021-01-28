@@ -1,5 +1,5 @@
 <template>
-  <div class="todo-item" v-bind:class="{done: todoItem.done}">
+  <div class="todo-item" :class="{done: todoItem.done}">
     <div class="content">
       <p>{{ todoItem.content}}</p><span v-show="todoItem.done">Done!</span>
     </div>
@@ -9,16 +9,23 @@
     </div>
     <div class="buttons">
       <button @click="deleteTodo" class="delete">Delete</button>
+      <button @click="todoItem.editModeOn = !todoItem.editModeOn" v-show="!todoItem.done">Edit</button>
       <button @click="moveUp" v-show="!todoItem.done">Move up</button>
       <button @click="moveDown" v-show="!todoItem.done">Move down</button>
       <button @click="taskDone" v-show="!todoItem.done" class="done-button">Task done!</button>
     </div>
+    <EditMode v-show="todoItem.editModeOn" :todoItem="todoItem"/>
   </div>
 </template>
 
 <script>
+import EditMode from "../components/EditMode.vue"
+
 export default {
   props: ['todoItem'],
+  components: {
+    EditMode
+  },
 
   methods: {
     deleteTodo() {

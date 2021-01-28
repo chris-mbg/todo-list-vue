@@ -17,10 +17,11 @@
             </div>
         </form>
     </div>
-
 </template>
 
 <script>
+
+
 export default {
     data(){
         return {
@@ -37,7 +38,8 @@ export default {
                 content: this.todo.content,
                 author: this.todo.author,
                 timestamp: this.getTime(),
-                done: false
+                done: false,
+                editModeOn: false
             };
             this.$store.dispatch('addNewTodoToList', newTodo);
             this.$router.push('/');

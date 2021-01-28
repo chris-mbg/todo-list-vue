@@ -10,25 +10,29 @@ export default new Vuex.Store({
         content: 'Do Vuex tutorial',
         author: 'Christina',
         timestamp: 'Fri, 22 Jan, 12:50',
-        done: false
+        done: false,
+        editModeOn: true
       },
       {
         content: 'Clean kitchen',
         author: 'Someone',
         timestamp: 'Fri, 22 Jan, 10:25',
-        done: false
+        done: false,
+        editModeOn: false
       },
       {
         content: 'Collect package at post office',
         author: 'Someone else',
         timestamp: 'Thu, 21 Jan, 14:04',
-        done: false
+        done: false,
+        editModeOn: false
       },
       {
         content: 'Buy coffee filters',
         author: 'Christina',
         timestamp: 'Thu, 21 Jan, 11:34',
-        done: false
+        done: false,
+        editModeOn: false
       }
     ]
   },
