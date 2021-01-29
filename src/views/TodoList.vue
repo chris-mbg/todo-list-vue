@@ -17,7 +17,6 @@ export default {
       return this.$store.state.todoList;
     }
   }
-
 }
 </script>
 

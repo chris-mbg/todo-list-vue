@@ -51,14 +51,12 @@ export default new Vuex.Store({
     addNewTodo: (state, payload) => {
       state.todoList.unshift(payload);
       localStorage.setItem('todos', JSON.stringify(state.todoList));
-      console.log(localStorage.getItem('todos'));
     },
 
     deleteTodo: (state, payload) => {
       state.todoList =
         state.todoList.filter(item => item.content !== payload.content);
       localStorage.setItem('todos', JSON.stringify(state.todoList));
-      console.log(state.todoList);
       return state.todoList;
     },
     taskDone: (state,payload) => {
@@ -72,8 +70,6 @@ export default new Vuex.Store({
       localStorage.setItem('todos', JSON.stringify(state.todoList));
     },
     moveUp: (state,payload) => {
-      console.log('In mutations', payload);
-      console.log('In mutations', state.todoList);
       const indexOfItem = state.todoList.findIndex(item => item.content === payload.content);
       if(indexOfItem < 1 || indexOfItem >= state.todoList.length){
         return;
@@ -103,7 +99,6 @@ export default new Vuex.Store({
       state.todoList[indexOfItem].timestamp = payload.newTimestamp;
       state.todoList[indexOfItem].timeString = payload.timeString;
       state.todoList[indexOfItem].editModeOn = false;
-      console.log('In mutation editTodo:', state.todoList[indexOfItem])
       localStorage.setItem('todos', JSON.stringify(state.todoList));
     }
 

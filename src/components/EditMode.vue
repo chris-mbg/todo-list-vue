@@ -3,10 +3,10 @@
         <p>Edit your todo:</p>
         <form @submit.prevent="editedTodo">
             <div class="content">
-                <textarea rows="2" cols="20" v-model="todoEdited.content"></textarea>
+                <textarea rows="2" cols="20" v-model="todoEdited.content" :placeholder="placeholderText.content"></textarea>
             </div>
             <div class="author">
-                <input type="text" v-model="todoEdited.author">
+                <input type="text" v-model="todoEdited.author" :placeholder="placeholderText.author">
             </div>
             <div class="button">
                 <input type="submit" value="Confirm">
@@ -21,24 +21,37 @@ export default {
 
     data() {
         return {
-            todoEdited: {
+            placeholderText: {
                 content: this.todoItem.content,
-                author: this.todoItem.author,
-                done: false,
-                timestamp: this.todoItem.timestamp,
-                timeString: this.todoItem.timeString,
-                editModeOn: true
+                author: this.todoItem.author
+            },
+            todoEdited: {
+                content: '',
+                author: '',
             }
+        }
+    },
+    watch: {
+        todoItem(newVal) {
+            //console.log('Prop changed: ', newVal, ' | was: ', oldVal);
+            this.placeholderText.content = newVal.content;
+            this.placeholderText.author = newVal.author;
+        }
+    },
+    computed: {
+        todoList() {
+            return this.$store.state.todoList;
         }
     },
 
     methods: {
         editedTodo(){
-            console.log('In editedTodo-method', this.todoItem, this.todoEdited);
             this.todoItem.editModeOn = false;
             this.todoEdited.editModeOn = false;
+            this.todoEdited.timestamp = this.todoItem.timestamp;
             this.todoEdited.newTimestamp = new Date();
             this.todoEdited.timeString = this.getFormattedTime(this.todoEdited.newTimestamp);
+            console.log('In editedTodo-method in EditMode', this.todoItem, this.todoEdited);
             this.$store.dispatch('editTodoInList', this.todoEdited);
         },
         getFormattedTime(time) {

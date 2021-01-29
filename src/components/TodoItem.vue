@@ -23,6 +23,7 @@ import EditMode from "../components/EditMode.vue"
 
 export default {
   props: ['todoItem'],
+
   components: {
     EditMode
   },
@@ -36,13 +37,11 @@ export default {
     },
     moveUp() {
       this.$store.dispatch('moveItemUp', this.todoItem);
-      console.log('In todoItem:', this.todoItem);
     },
     moveDown() {
       this.$store.dispatch('moveItemDown', this.todoItem);
     }
   }
-
 }
 </script>
 
