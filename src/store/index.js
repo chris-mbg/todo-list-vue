@@ -11,7 +11,7 @@ export default new Vuex.Store({
         author: 'Christina',
         timestamp: 'Fri, 22 Jan, 12:50',
         done: false,
-        editModeOn: true
+        editModeOn: false
       },
       {
         content: 'Clean kitchen',
@@ -88,7 +88,20 @@ export default new Vuex.Store({
       Vue.set(state.todoList, indexOfItem + 1, payload);
       Vue.set(state.todoList, indexOfItem, temp);
       localStorage.setItem('todos', JSON.stringify(state.todoList));
+    },
+    editTodo: (state, payload) => {
+      const indexOfItem = state.todoList.findIndex(item => item.timestamp === payload.timestamp);
+      if(indexOfItem < 0 || indexOfItem >= state.todoList.length){
+        return;
+      }
+      state.todoList[indexOfItem].content = payload.content;
+      state.todoList[indexOfItem].author = payload.author;
+      state.todoList[indexOfItem].timestamp = payload.newTimestamp;
+      state.todoList[indexOfItem].editModeOn = false;
+      console.log('In mutation editTodo:', state.todoList[indexOfItem])
+      localStorage.setItem('todos', JSON.stringify(state.todoList));
     }
+
   },
 
   actions: {
@@ -106,6 +119,9 @@ export default new Vuex.Store({
     },
     moveItemDown: (context, payload) => {
       context.commit('moveDown', payload);
+    },
+    editTodoInList: (context, payload) => {
+      context.commit('editTodo', payload);
     }
   },
 

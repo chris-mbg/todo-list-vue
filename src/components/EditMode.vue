@@ -1,17 +1,17 @@
 <template>
     <div class="edit-mode">
+        <p>Edit your todo:</p>
         <form @submit.prevent="editedTodo">
             <div class="content">
-                <textarea rows="2" cols="20" v-model="todoItem.content"></textarea>
+                <textarea rows="2" cols="20" v-model="todoEdited.content"></textarea>
             </div>
             <div class="author">
-                <input type="text" v-model="todoItem.author">
+                <input type="text" v-model="todoEdited.author">
             </div>
             <div class="button">
                 <input type="submit" value="Confirm">
             </div>
         </form>
-
     </div>
 </template>
 
@@ -19,10 +19,25 @@
 export default {
     props: ['todoItem'],
 
+    data() {
+        return {
+            todoEdited: {
+                content: this.todoItem.content,
+                author: this.todoItem.author,
+                done: false,
+                timestamp: this.todoItem.timestamp,
+                editModeOn: true
+            }
+        }
+    },
+
     methods: {
         editedTodo(){
+            console.log('In editedTodo-method', this.todoItem, this.todoEdited);
             this.todoItem.editModeOn = false;
-            this.todoItem.timestamp = this.getTime();
+            this.todoEdited.editModeOn = false;
+            this.todoEdited.newTimestamp = this.getTime();
+            this.$store.dispatch('editTodoInList', this.todoEdited);
         },
         getTime() {
             const options = { weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric'};
@@ -35,7 +50,7 @@ export default {
 
 <style scoped>
     form {
-        margin-top: 2rem;
+        margin-top: 1rem;
     }
     textarea {
         width: 100%;

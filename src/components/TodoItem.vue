@@ -103,7 +103,7 @@ export default {
     color: #F7F9FB;
     border: 1px solid #F7F9FB;
     border-radius: 5px;
-    margin: 0.3rem 0.5rem;
+    margin: 0.3rem 0.4rem;
   }
   button:hover{
     background-color: #f7f9fb;

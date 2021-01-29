@@ -24,7 +24,7 @@ export default {
 <style scoped>
   .todo-list {
     margin: 0.5rem;
-    max-width: 500px;
+    max-width: 600px;
   }
 
    @media screen and (min-width: 500px){
