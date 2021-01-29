@@ -21,7 +21,6 @@
 
 <script>
 
-
 export default {
     data(){
         return {
@@ -37,17 +36,17 @@ export default {
             let newTodo = {
                 content: this.todo.content,
                 author: this.todo.author,
-                timestamp: this.getTime(),
+                timestamp: new Date(),
                 done: false,
                 editModeOn: false
             };
+            newTodo.timeString = this.getFormattedTime(newTodo.timestamp);
             this.$store.dispatch('addNewTodoToList', newTodo);
             this.$router.push('/');
         },
-        getTime() {
+        getFormattedTime(time) {
             const options = { weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric'};
-            const now = new Date();
-            return new Intl.DateTimeFormat('en-GB', options).format(now);
+            return new Intl.DateTimeFormat('en-GB', options).format(time);
         },
         clearForm() {
             this.todo.author = '',

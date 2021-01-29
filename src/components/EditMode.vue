@@ -26,6 +26,7 @@ export default {
                 author: this.todoItem.author,
                 done: false,
                 timestamp: this.todoItem.timestamp,
+                timeString: this.todoItem.timeString,
                 editModeOn: true
             }
         }
@@ -36,13 +37,13 @@ export default {
             console.log('In editedTodo-method', this.todoItem, this.todoEdited);
             this.todoItem.editModeOn = false;
             this.todoEdited.editModeOn = false;
-            this.todoEdited.newTimestamp = this.getTime();
+            this.todoEdited.newTimestamp = new Date();
+            this.todoEdited.timeString = this.getFormattedTime(this.todoEdited.newTimestamp);
             this.$store.dispatch('editTodoInList', this.todoEdited);
         },
-        getTime() {
+        getFormattedTime(time) {
             const options = { weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric'};
-            const now = new Date();
-            return new Intl.DateTimeFormat('en-GB', options).format(now);
+            return new Intl.DateTimeFormat('en-GB', options).format(time);
         }
     }
 }

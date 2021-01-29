@@ -5,7 +5,7 @@
     </div>
     <div class="details">
       <p class="author">{{ todoItem.author}}</p>
-      <p class="timestamp">{{ todoItem.timestamp}}</p>
+      <p class="timestamp">{{ todoItem.timeString}}</p>
     </div>
     <div class="buttons">
       <button @click="deleteTodo" class="delete">Delete</button>

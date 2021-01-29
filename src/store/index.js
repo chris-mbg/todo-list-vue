@@ -9,28 +9,32 @@ export default new Vuex.Store({
       {
         content: 'Do Vuex tutorial',
         author: 'Christina',
-        timestamp: 'Fri, 22 Jan, 12:50',
+        timestamp: new Date('January 22 2021 12:50:00'),
+        timeString: 'Fri, 22 Jan, 12:50',
         done: false,
         editModeOn: false
       },
       {
         content: 'Clean kitchen',
         author: 'Someone',
-        timestamp: 'Fri, 22 Jan, 10:25',
+        timestamp: new Date('January 22 2021 10:25:00'),
+        timeString: 'Fri, 22 Jan, 10:25',
         done: false,
         editModeOn: false
       },
       {
         content: 'Collect package at post office',
         author: 'Someone else',
-        timestamp: 'Thu, 21 Jan, 14:04',
+        timestamp: new Date('January 21 2021 14:04:00'),
+        timeString: 'Thu, 21 Jan, 14:04',
         done: false,
         editModeOn: false
       },
       {
         content: 'Buy coffee filters',
         author: 'Christina',
-        timestamp: 'Thu, 21 Jan, 11:34',
+        timestamp: new Date('January 21 2021 11:34:00'),
+        timeString: 'Thu, 21 Jan, 11:34',
         done: false,
         editModeOn: false
       }
@@ -97,6 +101,7 @@ export default new Vuex.Store({
       state.todoList[indexOfItem].content = payload.content;
       state.todoList[indexOfItem].author = payload.author;
       state.todoList[indexOfItem].timestamp = payload.newTimestamp;
+      state.todoList[indexOfItem].timeString = payload.timeString;
       state.todoList[indexOfItem].editModeOn = false;
       console.log('In mutation editTodo:', state.todoList[indexOfItem])
       localStorage.setItem('todos', JSON.stringify(state.todoList));
