@@ -38,22 +38,24 @@ export default {
             this.placeholderText.author = newVal.author;
         }
     },
-    computed: {
-        todoList() {
-            return this.$store.state.todoList;
-        }
-    },
 
     methods: {
         editedTodo(){
+            if(!this.todoEdited.content){
+                this.todoEdited.content = this.todoItem.content;
+            }
+            if(!this.todoEdited.author){
+                this.todoEdited.author = this.todoItem.author;
+            }
+            this.todoEdited.timestamp = this.todoItem.timestamp;
             this.todoItem.editModeOn = false;
             this.todoEdited.editModeOn = false;
-            this.todoEdited.timestamp = this.todoItem.timestamp;
             this.todoEdited.newTimestamp = new Date();
             this.todoEdited.timeString = this.getFormattedTime(this.todoEdited.newTimestamp);
             console.log('In editedTodo-method in EditMode', this.todoItem, this.todoEdited);
             this.$store.dispatch('editTodoInList', this.todoEdited);
         },
+        
         getFormattedTime(time) {
             const options = { weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric'};
             return new Intl.DateTimeFormat('en-GB', options).format(time);
