@@ -9,9 +9,9 @@
     </div>
     <div class="buttons">
       <button @click="deleteTodo" class="delete">Delete</button>
-      <button @click="todoItem.editModeOn = !todoItem.editModeOn" v-show="!todoItem.done">Edit</button>
-      <button @click="moveDown" v-show="!todoItem.done">Move down</button>
-      <button @click="moveUp" v-show="!todoItem.done">Move up</button>
+      <button @click="toggleEditMode" v-show="!todoItem.done">Edit</button>
+      <button @click="moveDown" v-show="!todoItem.done && !todoItem.editModeOn">Move down</button>
+      <button @click="moveUp" v-show="!todoItem.done && !todoItem.editModeOn">Move up</button>
       <button @click="taskDone" v-show="!todoItem.done" class="done-button">Task done!</button>
     </div>
     <EditMode v-show="todoItem.editModeOn" :todoItem="todoItem"/>
@@ -40,6 +40,9 @@ export default {
     },
     moveDown() {
       this.$store.dispatch('moveItemDown', this.todoItem);
+    },
+    toggleEditMode() {
+      this.$store.dispatch('toggleEditMode', this.todoItem);
     }
   }
 }

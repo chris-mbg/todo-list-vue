@@ -50,7 +50,7 @@ export default new Vuex.Store({
       }
     },
 
-    // För varje ändring i array:n uppdateras även Local Storage.
+    // För varje ändring i array:n, eller item i array:n, uppdateras även Local Storage.
     // Använder timestamp för att hitta rätt todo i array:n.
 
     addNewTodo: (state, payload) => {
@@ -94,6 +94,14 @@ export default new Vuex.Store({
       Vue.set(state.todoList, indexOfItem, temp);
       localStorage.setItem('todos', JSON.stringify(state.todoList));
     },
+    changeEditMode: (state, payload) => {
+      const indexOfItem = state.todoList.findIndex(item => item.timestamp === payload.timestamp);
+      if(indexOfItem < 0 || indexOfItem >= state.todoList.length){
+        return;
+      }
+      state.todoList[indexOfItem].editModeOn = !state.todoList[indexOfItem].editModeOn;
+      localStorage.setItem('todos', JSON.stringify(state.todoList));
+    },
 
     // För den editerade todo:n används den tidigare timestamp till att hitta rätt todo i arrayn, därefter sätts en ny timestamp.
     editTodo: (state, payload) => {
@@ -131,6 +139,9 @@ export default new Vuex.Store({
     },
     editTodoInList: (context, payload) => {
       context.commit('editTodo', payload);
+    },
+    toggleEditMode: (context, payload) => {
+      context.commit('changeEditMode', payload);
     }
   },
 
