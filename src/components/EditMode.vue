@@ -16,6 +16,10 @@
 </template>
 
 <script>
+// Den här komponenten är den som jag har jobbat mest med, och den gav mig en hel del huvudvärk, men också större förståelse för hur Vue fungerar :)
+
+// Komponenten tar emot sitt tillhörande todo-item som en prop från föräldrakomponenten. Jag ville ha med content och author från 'orginal'-todo:n och dessa visas som placeholder i formulär-fälten, och uppdateras när EditMode får en ny prop från föräldrakomponenten TodoItem. Den ändrade informationen (content och/eller author) sparas i variabeln todoEdited. Fyller användaren inte i något men ändå trycker submit så sätts värdet till orginalets. På todoEdited får med sig orginal-todo:ns timestamp, och denna används sedan i /store/index.js för at leta upp rätt item i todoList (array:n) och ändra denna (även tidsstämpeln).
+
 export default {
     props: ['todoItem'],
 
@@ -33,7 +37,6 @@ export default {
     },
     watch: {
         todoItem(newVal) {
-            //console.log('Prop changed: ', newVal, ' | was: ', oldVal);
             this.placeholderText.content = newVal.content;
             this.placeholderText.author = newVal.author;
         }
@@ -52,10 +55,8 @@ export default {
             this.todoEdited.editModeOn = false;
             this.todoEdited.newTimestamp = new Date();
             this.todoEdited.timeString = this.getFormattedTime(this.todoEdited.newTimestamp);
-            console.log('In editedTodo-method in EditMode', this.todoItem, this.todoEdited);
             this.$store.dispatch('editTodoInList', this.todoEdited);
         },
-        
         getFormattedTime(time) {
             const options = { weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric'};
             return new Intl.DateTimeFormat('en-GB', options).format(time);

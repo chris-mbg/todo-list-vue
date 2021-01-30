@@ -42,12 +42,17 @@ export default new Vuex.Store({
   },
 
   mutations: {
+    // Om det finns en array med todos i Local Storage hämtas denna innan App skapas, se main.js.
     initialiseStore: (state) => {
       if(localStorage.getItem('todos')){
         state.todoList = JSON.parse(localStorage.getItem('todos'));
         return state.todoList;
       }
     },
+
+    // För varje ändring i array:n uppdateras även Local Storage.
+    // Använder timestamp för att hitta rätt todo i array:n.
+
     addNewTodo: (state, payload) => {
       state.todoList.unshift(payload);
       localStorage.setItem('todos', JSON.stringify(state.todoList));
@@ -55,13 +60,13 @@ export default new Vuex.Store({
 
     deleteTodo: (state, payload) => {
       state.todoList =
-        state.todoList.filter(item => item.content !== payload.content);
+        state.todoList.filter(item => item.timestamp !== payload.timestamp);
       localStorage.setItem('todos', JSON.stringify(state.todoList));
       return state.todoList;
     },
     taskDone: (state,payload) => {
       payload.done = true;
-      const indexOfItem = state.todoList.findIndex(item => item.content === payload.content);
+      const indexOfItem = state.todoList.findIndex(item => item.timestamp === payload.timestamp);
       if(indexOfItem < 0 || indexOfItem >= state.todoList.length){
         return;
       }
@@ -70,7 +75,7 @@ export default new Vuex.Store({
       localStorage.setItem('todos', JSON.stringify(state.todoList));
     },
     moveUp: (state,payload) => {
-      const indexOfItem = state.todoList.findIndex(item => item.content === payload.content);
+      const indexOfItem = state.todoList.findIndex(item => item.timestamp === payload.timestamp);
       if(indexOfItem < 1 || indexOfItem >= state.todoList.length){
         return;
       }
@@ -80,7 +85,7 @@ export default new Vuex.Store({
       localStorage.setItem('todos', JSON.stringify(state.todoList));
     },
     moveDown: (state, payload) => {
-      const indexOfItem = state.todoList.findIndex(item => item.content === payload.content);
+      const indexOfItem = state.todoList.findIndex(item => item.timestamp === payload.timestamp);
       if(indexOfItem < 0 || indexOfItem >= state.todoList.length - 1){
         return;
       }
@@ -89,6 +94,8 @@ export default new Vuex.Store({
       Vue.set(state.todoList, indexOfItem, temp);
       localStorage.setItem('todos', JSON.stringify(state.todoList));
     },
+
+    // För den editerade todo:n används den tidigare timestamp till att hitta rätt todo i arrayn, därefter sätts en ny timestamp.
     editTodo: (state, payload) => {
       const indexOfItem = state.todoList.findIndex(item => item.timestamp === payload.timestamp);
       if(indexOfItem < 0 || indexOfItem >= state.todoList.length){
@@ -105,6 +112,8 @@ export default new Vuex.Store({
   },
 
   actions: {
+    // Använder actions, efter att ha sett Net Ninjas Vuex-tutorial, där han rekommenderar att trots att man inte utför ngt som är asynkront är det 'good practice' att ändå ta vägen via actions.
+
     addNewTodoToList: (context, payload) => {
       context.commit('addNewTodo', payload);
     },

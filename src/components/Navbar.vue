@@ -1,7 +1,7 @@
 <template>
   <div class="navbar">
-      <router-link to="/">ToDo list</router-link>
-      <router-link to="/add">Add new ToDo</router-link>
+      <router-link to="/">Todo list</router-link>
+      <router-link to="/add">Add new Todo</router-link>
       <router-link to="/about">About</router-link>
   </div>
 </template>
